@@ -5,37 +5,37 @@ const FEATURES = [
     icon: "👤",
     title: "Client Hub",
     description:
-      "Track every client, contact, and conversation in one place. Never lose context between calls again.",
+      "Keep every client's details, contacts, contracts, and communication history in one clean view. Never scramble for a client's email or project context again.",
   },
   {
     icon: "📋",
     title: "Project Command Center",
     description:
-      "Kanban boards, task lists, and deadlines for all your active projects — linked directly to each client.",
+      "Track every deliverable, deadline, and project status at a glance. Stay on top of multiple clients without dropping the ball.",
   },
   {
     icon: "🧾",
     title: "Invoice & Income Tracker",
     description:
-      "Log sent invoices, track payment status, and see your monthly income at a glance.",
+      "Log invoices, track payment status, and see your monthly revenue in seconds. Stop chasing down what you're owed.",
   },
   {
     icon: "🎯",
     title: "Goals & OKRs",
     description:
-      "Set quarterly goals and track progress weekly. Your business grows when you measure what matters.",
+      "Set quarterly goals and break them into trackable outcomes. Build the business you want — not just the one that keeps you busy.",
   },
   {
     icon: "📅",
     title: "Weekly Review System",
     description:
-      "Built-in review templates to reflect on wins, catch blockers, and plan the week ahead.",
+      "A structured weekly ritual to review your wins, flag blockers, and plan what matters next. Work smarter, not just harder.",
   },
   {
     icon: "⚡",
     title: "Quick Capture",
     description:
-      "Dump ideas, tasks, and notes instantly. The system routes them to the right place automatically.",
+      "Dump ideas, tasks, and notes instantly — no friction, no lost thoughts. Everything finds its place automatically.",
   },
 ];
 
@@ -74,15 +74,14 @@ export default function Home() {
           Coming soon — join the waitlist
         </div>
         <h1 className="text-5xl sm:text-6xl font-bold tracking-tight leading-[1.1] mb-6 text-gray-900">
-          Your freelance business,
+          Stop juggling tabs.
           <br />
-          <span className="text-amber-500">finally organized.</span>
+          <span className="text-amber-500">Run your freelance business from one Notion workspace.</span>
         </h1>
         <p className="text-xl text-gray-500 max-w-xl mb-10 leading-relaxed">
-          Stop juggling clients, projects, invoices, and goals across 5
-          different apps. Notion Template OS brings everything together in one
-          beautifully structured workspace — built for freelancers with 1–10
-          active clients.
+          Notion Template OS gives freelancers and solopreneurs a single command
+          center for clients, projects, invoices, and goals. No more scattered
+          tools, missed deadlines, or invoices slipping through the cracks.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 items-center justify-center w-full max-w-md">
           <WaitlistForm />
@@ -104,7 +103,7 @@ export default function Home() {
       {/* Features */}
       <section className="py-24 px-6 max-w-5xl mx-auto w-full">
         <h2 className="text-3xl font-bold text-center mb-4">
-          Everything you need, nothing you don&apos;t
+          Six systems. One workspace. Zero scattered tabs.
         </h2>
         <p className="text-gray-500 text-center mb-16 max-w-xl mx-auto">
           Six interconnected systems that work together as one. No plugins, no
@@ -190,11 +189,12 @@ export default function Home() {
         className="bg-gray-900 text-white py-24 px-6 text-center"
       >
         <h2 className="text-4xl font-bold mb-4">
-          Be first when it launches.
+          Get early access — before the price goes up.
         </h2>
         <p className="text-gray-400 mb-10 max-w-md mx-auto">
-          Join the waitlist and get early-bird pricing + a free bonus template
-          on launch day.
+          Solo plan $39 · Pro Bundle $79 · One-time payment, yours forever.
+          Join the waitlist now and lock in launch-day pricing plus a free bonus
+          template.
         </p>
         <div className="max-w-md mx-auto">
           <WaitlistForm dark />
