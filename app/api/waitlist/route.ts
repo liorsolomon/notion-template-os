@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const CAMPAIGN_ID = "notion-template-os";
+
 export async function POST(req: NextRequest) {
   const { email } = await req.json();
 
@@ -7,59 +9,63 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
 
-  const resendKey = process.env.RESEND_API_KEY;
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_ANON_KEY;
 
-  if (!resendKey) {
-    // In dev or if key not configured, just log and accept
-    console.log("[waitlist] Email captured (no Resend key):", email);
-    return NextResponse.json({ ok: true });
+  if (supabaseUrl && supabaseKey) {
+    try {
+      await fetch(`${supabaseUrl}/rest/v1/email_waitlist`, {
+        method: "POST",
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+          "Content-Type": "application/json",
+          Prefer: "return=minimal",
+        },
+        body: JSON.stringify({ email, campaign_id: CAMPAIGN_ID }),
+      });
+    } catch {
+      // fail silently — email capture is best effort
+    }
+  } else {
+    console.log("[waitlist] Supabase not configured, email captured:", email);
   }
 
-  try {
-    // Add contact to Resend audience
-    const audienceId = process.env.RESEND_AUDIENCE_ID;
-    if (audienceId) {
-      await fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
+  const resendKey = process.env.RESEND_API_KEY;
+
+  if (resendKey) {
+    try {
+      // Send welcome email
+      await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${resendKey}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, unsubscribed: false }),
+        body: JSON.stringify({
+          from: "Notion Template OS <hello@notiontemplateos.com>",
+          to: [email],
+          subject: "You're on the waitlist 🎉",
+          html: `
+            <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto; padding: 32px; color: #111;">
+              <h1 style="font-size: 24px; font-weight: 700; margin-bottom: 16px;">You're in! 🎉</h1>
+              <p style="color: #555; line-height: 1.6;">
+                Thanks for joining the Notion Template OS waitlist. You'll be among the first to know when we launch — and you'll get early-bird pricing.
+              </p>
+              <p style="color: #555; line-height: 1.6;">
+                While you wait, think about how much time you'd save with clients, projects, invoices, and goals all in one place.
+              </p>
+              <p style="color: #555; line-height: 1.6; margin-top: 24px;">
+                — The Notion Template OS team
+              </p>
+            </div>
+          `,
+        }),
       });
+    } catch (err) {
+      console.error("[waitlist] Resend error:", err);
     }
-
-    // Send welcome email
-    await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${resendKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: "Notion Template OS <hello@notiontemplateos.com>",
-        to: [email],
-        subject: "You're on the waitlist 🎉",
-        html: `
-          <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto; padding: 32px; color: #111;">
-            <h1 style="font-size: 24px; font-weight: 700; margin-bottom: 16px;">You're in! 🎉</h1>
-            <p style="color: #555; line-height: 1.6;">
-              Thanks for joining the Notion Template OS waitlist. You'll be among the first to know when we launch — and you'll get early-bird pricing.
-            </p>
-            <p style="color: #555; line-height: 1.6;">
-              While you wait, think about how much time you'd save with clients, projects, invoices, and goals all in one place.
-            </p>
-            <p style="color: #555; line-height: 1.6; margin-top: 24px;">
-              — The Notion Template OS team
-            </p>
-          </div>
-        `,
-      }),
-    });
-
-    return NextResponse.json({ ok: true });
-  } catch (err) {
-    console.error("[waitlist] Resend error:", err);
-    return NextResponse.json({ error: "Failed to send" }, { status: 500 });
   }
+
+  return NextResponse.json({ ok: true });
 }
