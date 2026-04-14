@@ -28,7 +28,7 @@ test.describe('Notion Template OS homepage', () => {
     ]);
 
     // Success: "🎉 You're on the list! We'll be in touch."
-    await expect(page.locator('text=/on the list/i')).toBeVisible({ timeout: 8_000 });
+    await expect(page.locator('text=/on the list/i').first()).toBeVisible({ timeout: 8_000 });
   });
 
   test('waitlist anchor link scrolls to form', async ({ page }) => {
