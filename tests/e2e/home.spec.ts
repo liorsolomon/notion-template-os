@@ -1,0 +1,51 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Notion Template OS homepage', () => {
+  test('page loads with headline visible', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('h1')).toBeVisible();
+    await expect(page.locator('h1')).toContainText(/notion|template|juggling/i);
+  });
+
+  test('waitlist section is present', async ({ page }) => {
+    await page.goto('/');
+    const emailInput = page.locator('input[type="email"], input[placeholder*="email" i]').first();
+    await expect(emailInput).toBeVisible();
+  });
+
+  test('email form accepts input and submits', async ({ page }) => {
+    // Mock the waitlist API to return success without hitting Supabase/Resend
+    await page.route('**/api/waitlist', (route) =>
+      route.fulfill({ status: 200, body: JSON.stringify({ ok: true }) })
+    );
+
+    await page.goto('/');
+    const emailInput = page.locator('input[type="email"], input[placeholder*="email" i]').first();
+    await emailInput.fill('test@example.com');
+    await page.click('button[type="submit"], input[type="submit"]');
+
+    // Success state — should show thank you / confirmation
+    await expect(page.locator('text=/thank|confirmed|you\'re in|early access|check your/i')).toBeVisible({ timeout: 8_000 });
+  });
+
+  test('waitlist anchor link scrolls to form', async ({ page }) => {
+    await page.goto('/');
+    const anchor = page.locator('a[href="#waitlist"]').first();
+    if (await anchor.isVisible()) {
+      await anchor.click();
+      const emailInput = page.locator('input[type="email"]').first();
+      await expect(emailInput).toBeInViewport({ timeout: 3_000 });
+    }
+  });
+
+  test('page has no 4xx internal links', async ({ page }) => {
+    await page.goto('/');
+    const links = await page.locator('a[href^="/"]').all();
+    const hrefs = await Promise.all(links.map((l) => l.getAttribute('href')));
+    for (const href of hrefs) {
+      if (!href) continue;
+      const res = await page.request.get(href);
+      expect(res.status(), `Broken link: ${href}`).toBeLessThan(400);
+    }
+  });
+});
