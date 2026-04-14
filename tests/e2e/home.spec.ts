@@ -9,23 +9,26 @@ test.describe('Notion Template OS homepage', () => {
 
   test('waitlist section is present', async ({ page }) => {
     await page.goto('/');
-    const emailInput = page.locator('input[type="email"], input[placeholder*="email" i]').first();
+    const emailInput = page.locator('input[type="email"]').first();
     await expect(emailInput).toBeVisible();
   });
 
-  test('email form accepts input and submits', async ({ page }) => {
-    // Mock the waitlist API to return success without hitting Supabase/Resend
+  test('email form submits and shows success', async ({ page }) => {
     await page.route('**/api/waitlist', (route) =>
-      route.fulfill({ status: 200, body: JSON.stringify({ ok: true }) })
+      route.fulfill({ status: 200, body: JSON.stringify({ ok: true }), contentType: 'application/json' })
     );
 
     await page.goto('/');
-    const emailInput = page.locator('input[type="email"], input[placeholder*="email" i]').first();
+    const emailInput = page.locator('input[type="email"]').first();
     await emailInput.fill('test@example.com');
-    await page.click('button[type="submit"], input[type="submit"]');
 
-    // Success state — should show thank you / confirmation
-    await expect(page.locator('text=/thank|confirmed|you\'re in|early access|check your/i')).toBeVisible({ timeout: 8_000 });
+    await Promise.any([
+      page.click('input[type="submit"]').catch(() => {}),
+      page.click('button[type="submit"]').catch(() => {}),
+    ]);
+
+    // Success: "🎉 You're on the list! We'll be in touch."
+    await expect(page.locator('text=/on the list/i')).toBeVisible({ timeout: 8_000 });
   });
 
   test('waitlist anchor link scrolls to form', async ({ page }) => {
