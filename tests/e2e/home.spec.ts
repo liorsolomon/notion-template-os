@@ -33,8 +33,8 @@ test.describe('Notion Template OS homepage', () => {
 
   test('waitlist anchor link and form are reachable', async ({ page }) => {
     await page.goto('/');
-    // Verify the anchor exists and the waitlist section is on the page
-    const anchor = page.locator('a[href="#waitlist"]').first();
+    // Nav CTA links to #get-access (the inline form section); #waitlist is the full waitlist section below
+    const anchor = page.locator('a[href="#get-access"]').first();
     await expect(anchor).toBeVisible();
     // Scroll email input into view and confirm it's reachable
     const emailInput = page.locator('input[type="email"]').first();
