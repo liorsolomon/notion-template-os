@@ -113,7 +113,7 @@ export default function Home() {
           <br />
           <span className="text-amber-500">Run your freelance business from one Notion workspace.</span>
         </h1>
-        <p className="text-xl text-gray-500 max-w-xl mb-10 leading-relaxed">
+        <p className="text-xl text-gray-600 max-w-xl mb-10 leading-relaxed">
           Notion Template OS gives freelancers and solopreneurs a single command
           center for clients, projects, invoices, and goals. No more scattered
           tools, missed deadlines, or invoices slipping through the cracks.
@@ -128,10 +128,10 @@ export default function Home() {
 
       {/* Social proof bar */}
       <section className="bg-gray-50 border-y border-gray-100 py-6">
-        <div className="max-w-3xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-center gap-8 text-center text-sm text-gray-500">
-          <span>🧑‍💻 Built for freelancers &amp; solopreneurs</span>
-          <span>⭐ Designed around real workflows</span>
-          <span>🔒 Your data stays in Notion — always</span>
+        <div className="max-w-3xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-center gap-8 text-center text-sm text-gray-600">
+          <span className="text-gray-600">🧑‍💻 Built for freelancers &amp; solopreneurs</span>
+          <span className="text-gray-600">⭐ Designed around real workflows</span>
+          <span className="text-gray-600">🔒 Your data stays in Notion — always</span>
         </div>
       </section>
 
@@ -140,7 +140,7 @@ export default function Home() {
         <h2 className="text-3xl font-bold text-center mb-4">
           Six systems. One workspace. Zero scattered tabs.
         </h2>
-        <p className="text-gray-500 text-center mb-16 max-w-xl mx-auto">
+        <p className="text-gray-600 text-center mb-16 max-w-xl mx-auto">
           Six interconnected systems that work together as one. No plugins, no
           code, no monthly fees.
         </p>
@@ -152,7 +152,7 @@ export default function Home() {
             >
               <div className="text-3xl mb-3">{f.icon}</div>
               <h3 className="font-semibold text-lg mb-2">{f.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">
+              <p className="text-gray-600 text-sm leading-relaxed">
                 {f.description}
               </p>
             </div>
@@ -188,7 +188,7 @@ export default function Home() {
       {/* How It Works */}
       <section className="py-20 px-6 max-w-4xl mx-auto w-full">
         <h2 className="text-3xl font-bold text-center mb-4 text-gray-900">How it works</h2>
-        <p className="text-gray-500 text-center mb-14 max-w-lg mx-auto">
+        <p className="text-gray-600 text-center mb-14 max-w-lg mx-auto">
           From purchase to a fully working system in under an hour.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -200,7 +200,7 @@ export default function Home() {
             <div key={s.step} className="text-center">
               <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-700 font-bold text-lg flex items-center justify-center mx-auto mb-4">{s.step}</div>
               <h3 className="font-semibold text-gray-900 mb-2">{s.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{s.body}</p>
+              <p className="text-gray-600 text-sm leading-relaxed">{s.body}</p>
             </div>
           ))}
         </div>
@@ -210,7 +210,7 @@ export default function Home() {
       <section className="bg-gray-50 py-20 px-6">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-4 text-gray-900">What you get</h2>
-          <p className="text-gray-500 text-center mb-10">Everything in one download. Nothing hidden behind upsells.</p>
+          <p className="text-gray-600 text-center mb-10">Everything in one download. Nothing hidden behind upsells.</p>
           <ul className="space-y-4">
             {[
               "6 fully interconnected Notion templates (Client Hub, Project Command Center, Invoice Tracker, Goals & OKRs, Weekly Review, Quick Capture)",
@@ -239,7 +239,7 @@ export default function Home() {
               <p className="text-gray-700 leading-relaxed mb-4">
                 &ldquo;{t.quote}&rdquo;
               </p>
-              <footer className="text-sm font-semibold text-gray-500">
+              <footer className="text-sm font-semibold text-gray-600">
                 {t.name}
               </footer>
             </blockquote>
