@@ -119,7 +119,7 @@ export default function Home() {
           tools, missed deadlines, or invoices slipping through the cracks.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 items-center justify-center w-full max-w-md" id="get-access">
-          <WaitlistForm />
+          <WaitlistForm buttonText="Get Instant Access — $39" />
         </div>
         <p className="text-sm text-gray-400 mt-4">
           30-day money-back guarantee · No subscription · Lifetime updates
@@ -295,7 +295,7 @@ export default function Home() {
           30-day money-back guarantee — zero risk.
         </p>
         <div className="max-w-md mx-auto">
-          <WaitlistForm dark />
+          <WaitlistForm dark buttonText="Get Instant Access — $39" />
         </div>
         <p className="text-gray-500 text-sm mt-4">
           No spam. Unsubscribe any time.
