@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { usePostHog } from "posthog-js/react";
 
-export default function WaitlistForm({ dark = false }: { dark?: boolean }) {
+export default function WaitlistForm({ dark = false, buttonText = "Join Waitlist" }: { dark?: boolean; buttonText?: string }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const posthog = usePostHog();
@@ -65,7 +65,7 @@ export default function WaitlistForm({ dark = false }: { dark?: boolean }) {
         disabled={status === "loading"}
         className="bg-amber-500 hover:bg-amber-600 text-white font-semibold text-sm px-6 py-3 rounded-full transition-colors disabled:opacity-50 whitespace-nowrap"
       >
-        {status === "loading" ? "Joining…" : "Join Waitlist"}
+        {status === "loading" ? "Joining…" : buttonText}
       </button>
       {status === "error" && (
         <p className="text-red-500 text-xs mt-1 w-full text-center">
