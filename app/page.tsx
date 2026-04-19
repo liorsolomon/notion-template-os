@@ -86,6 +86,35 @@ export default function Home() {
         </p>
       </section>
 
+      {/* Product preview */}
+      <section className="bg-gray-50 border-y border-gray-100 py-16 px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-center text-xs text-gray-400 mb-8 uppercase tracking-wider font-semibold">What&apos;s in the toolkit</p>
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+            {[
+              { icon: "🤝", title: "NDA", lines: ["Mutual and one-way", "Fill-in-the-blank fields", "Google Docs + .docx"] },
+              { icon: "📋", title: "Statement of Work", lines: ["Scope, timeline, deliverables", "Milestone-based payment", "Change order clause"] },
+              { icon: "📄", title: "Client Proposal", lines: ["Problem → solution flow", "Pricing table included", "Ready to brand"] },
+              { icon: "🧾", title: "Invoice", lines: ["Itemized line items", "Net 30 / due on receipt", "Your logo, your terms"] },
+            ].map((doc) => (
+              <div key={doc.title} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
+                <div className="text-2xl mb-3">{doc.icon}</div>
+                <div className="font-semibold text-sm text-gray-800 mb-2">{doc.title}</div>
+                <ul className="space-y-1">
+                  {doc.lines.map((line) => (
+                    <li key={line} className="text-xs text-gray-500 flex items-start gap-1.5">
+                      <span className="text-amber-400 mt-0.5 shrink-0">·</span>
+                      {line}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <p className="text-center text-xs text-gray-400 mt-6">+ 4 more documents included · Google Docs &amp; .docx · Ready to edit</p>
+        </div>
+      </section>
+
       {/* Why templates.3vo.ai */}
       <section className="bg-amber-50 py-20 px-6">
         <div className="max-w-4xl mx-auto">
