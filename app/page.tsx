@@ -40,6 +40,10 @@ const FAQ = [
     a: "Yes. No restrictions on use.",
   },
   {
+    q: "What if I need a template that isn't listed?",
+    a: "Tell us. We're adding to the suite regularly.",
+  },
+  {
     q: "Do I need to pay again for updates?",
     a: "No. One-time purchase. You get access to all future updates.",
   },
