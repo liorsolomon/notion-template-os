@@ -1,4 +1,5 @@
 import WaitlistForm from "./waitlist-form";
+import NdaGateForm from "./nda-gate-form";
 
 const WHY = [
   {
@@ -84,6 +85,24 @@ export default function Home() {
         <p className="text-sm text-gray-400 mt-4">
           $49 — one-time · No subscription · Instant access
         </p>
+      </section>
+
+      {/* Free NDA download gate */}
+      <section className="py-14 px-6 border-b border-gray-100">
+        <div className="max-w-2xl mx-auto">
+          <div className="bg-gray-50 border border-gray-200 rounded-2xl p-8">
+            <div className="text-center mb-6">
+              <span className="text-xs font-semibold uppercase tracking-wider text-amber-600">
+                Try one template free
+              </span>
+              <h2 className="text-2xl font-bold text-gray-900 mt-2">Get the NDA</h2>
+              <p className="text-gray-500 text-sm mt-2 max-w-sm mx-auto">
+                Enter your email and get the NDA template instantly. No credit card, no catch.
+              </p>
+            </div>
+            <NdaGateForm />
+          </div>
+        </div>
       </section>
 
       {/* Why templates.3vo.ai */}
