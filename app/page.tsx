@@ -61,7 +61,7 @@ export default function Home() {
           href="#get-it"
           className="bg-black text-white text-sm font-medium px-4 py-2 rounded-full hover:bg-gray-800 transition-colors"
         >
-          Get it — $49
+          Get Early Access — Free
         </a>
       </nav>
 
@@ -79,7 +79,7 @@ export default function Home() {
           and more. Built for solopreneurs who move fast. One-time. Keep forever.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 items-center justify-center w-full max-w-md" id="get-it">
-          <WaitlistForm buttonText="Get it — $49" />
+          <WaitlistForm buttonText="Get Early Access — Free" />
         </div>
         <p className="text-sm text-gray-400 mt-4">
           $49 — one-time · No subscription · Instant access
@@ -196,7 +196,7 @@ export default function Home() {
           $49 one-time · Keep forever · Instant access.
         </p>
         <div className="max-w-md mx-auto" id="get-it-bottom">
-          <WaitlistForm dark buttonText="Get it — $49" />
+          <WaitlistForm dark buttonText="Get Early Access — Free" />
         </div>
         <p className="text-gray-500 text-sm mt-4">
           No subscription · Includes all future updates
