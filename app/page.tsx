@@ -71,7 +71,7 @@ export default function Home() {
           Full suite · $49 one-time · No subscription
         </div>
         <h1 className="text-5xl sm:text-6xl font-bold tracking-tight leading-[1.1] mb-6 text-gray-900">
-          Every business doc you need —{" "}
+          Every business doc you need -{" "}
           <span className="text-amber-500">without the lawyer fees.</span>
         </h1>
         <p className="text-xl text-gray-600 max-w-xl mb-10 leading-relaxed">
@@ -82,7 +82,7 @@ export default function Home() {
           <WaitlistForm buttonText="Get Early Access — Free" />
         </div>
         <p className="text-sm text-gray-400 mt-4">
-          $49 — one-time · No subscription · Instant access
+          $49 - one-time · No subscription · Instant access
         </p>
       </section>
 
