@@ -1,12 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePostHog } from "posthog-js/react";
+
+function getUtmParams() {
+  if (typeof window === "undefined") return {};
+  const p = new URLSearchParams(window.location.search);
+  const stored = (() => { try { return JSON.parse(sessionStorage.getItem("utm_3vo") || "{}"); } catch { return {}; } })();
+  return {
+    utm_source: p.get("utm_source") || stored.utm_source || "",
+    utm_medium: p.get("utm_medium") || stored.utm_medium || "",
+    utm_campaign: p.get("utm_campaign") || stored.utm_campaign || "",
+    utm_content: p.get("utm_content") || stored.utm_content || "",
+  };
+}
 
 export default function WaitlistForm({ dark = false, buttonText = "Join Waitlist" }: { dark?: boolean; buttonText?: string }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const posthog = usePostHog();
+
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search);
+    const utms = { utm_source: p.get("utm_source"), utm_medium: p.get("utm_medium"), utm_campaign: p.get("utm_campaign"), utm_content: p.get("utm_content") };
+    if (Object.values(utms).some(Boolean)) {
+      try { sessionStorage.setItem("utm_3vo", JSON.stringify(utms)); } catch {}
+    }
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -19,7 +39,7 @@ export default function WaitlistForm({ dark = false, buttonText = "Join Waitlist
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, ...getUtmParams() }),
       });
       if (res.ok) {
         setStatus("success");
